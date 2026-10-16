@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alessandra Ricci | Consulente del Lavoro a Firenze</title>
+    <meta name="description" content="Consulenza del lavoro professionale per imprese a Firenze. Gestione del personale, elaborazione buste paga e consulenza previdenziale.">
+    <!-- Importazione Font Google: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variabili Colore */
+        :root {
+            --primary-color: #1E293B; /* Blu Notte */
+            --accent-color: #2563EB; /* Blu Accento (CTA) */
+            --bg-light: #F8FAFC; /* Grigio Sfondo */
+            --text-dark: #334155;
+            --white: #FFFFFF;
+        }
+
+        /* Reset e Stili Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); line-height: 1.6; background-color: var(--white); }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Bottoni */
+        .btn { display: inline-block; background-color: var(--accent-color); color: var(--white); padding: 12px 24px; border-radius: 6px; font-weight: 600; transition: background 0.3s; border: none; cursor: pointer; }
+        .btn:hover { background-color: #1D4ED8; }
+        .btn-outline { background-color: transparent; border: 2px solid var(--accent-color); color: var(--accent-color); }
+        .btn-outline:hover { background-color: var(--accent-color); color: var(--white); }
+
+        /* Header */
+        header { background-color: var(--white); padding: 15px 0; border-bottom: 1px solid #E2E8F0; position: sticky; top: 0; z-index: 1000; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a:hover { color: var(--accent-color); }
+        
+        /* Hero Section */
+        .hero { background-color: var(--primary-color); color: var(--white); padding: 80px 0; text-align: center; }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 20px; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto; }
+        
+        /* Sezioni Generiche */
+        .section { padding: 80px 0; }
+        .section-light { background-color: var(--bg-light); }
+        .section-title { text-align: center; font-size: 2.2rem; color: var(--primary-color); margin-bottom: 40px; }
+        
+        /* Servizi */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .service-card { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid var(--accent-color); }
+        .service-card h3 { margin-bottom: 15px; color: var(--primary-color); }
+        
+        /* Chi Sono */
+        .about-content { display: flex; gap: 40px; align-items: center; }
+        .about-text { flex: 1; }
+        .about-text p { margin-bottom: 15px; }
+        .about-image { flex: 1; text-align: center; }
+        /* Sostituire il src con il link alla foto di tua madre */
+        .about-image img { max-width: 100%; border-radius: 8px; box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+
+        /* Contatti */
+        .contact-wrapper { display: flex; gap: 40px; }
+        .contact-info, .contact-form { flex: 1; background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .contact-info h3 { margin-bottom: 20px; color: var(--primary-color); }
+        .contact-info p { margin-bottom: 10px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #CBD5E1; border-radius: 4px; font-family: inherit; }
+        
+        /* Footer */
+        footer { background-color: var(--primary-color); color: var(--white); text-align: center; padding: 30px 0; font-size: 0.9rem; }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 15px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .hero h1 { font-size: 2rem; }
+            .about-content, .contact-wrapper { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Alessandra Ricci<br><span style="font-size: 0.8rem; font-weight: 400; color: var(--text-dark);">Consulente del Lavoro</span></div>
+            <nav class="nav-links">
+                <a href="#servizi">Servizi</a>
+                <a href="#chi-sono">Chi Sono</a>
+                <a href="#contatti">Contatti</a>
+                <a href="#contatti" class="btn">Richiedi Consulenza</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Consulenza del Lavoro Professionale per Imprese a Firenze</h1>
+            <p>Affianchiamo aziende e professionisti nella gestione del personale, elaborazione paghe e consulenza previdenziale con competenza e precisione.</p>
+            <a href="#contatti" class="btn">Prenota un Appuntamento</a>
+        </div>
+    </section>
+
+    <!-- SERVIZI -->
+    <section id="servizi" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">I Nostri Servizi</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Elaborazione Buste Paga</h3>
+                    <p>Gestione completa cedolini paga, contributi, F24 e adempimenti mensili per aziende di ogni settore.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Contrattualistica</h3>
+                    <p>Assistenza per assunzioni, inquadramento del personale, agevolazioni contributive e tirocini.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Consulenza Sindacale</h3>
+                    <p>Gestione del contenzioso del lavoro, procedimenti disciplinari e assistenza in sede di vertenza.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Consulenza Aziendale</h3>
+                    <p>Budget del personale, analisi dei costi aziendali e welfare per ottimizzare le risorse umane.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHI SONO -->
+    <section id="chi-sono" class="section">
+        <div class="container about-content">
+            <div class="about-text">
+                <h2 style="color: var(--primary-color); margin-bottom: 20px; font-size: 2.2rem;">Alessandra Ricci</h2>
+                <h3 style="color: var(--accent-color); margin-bottom: 20px;">Consulente del Lavoro Iscritta all'Albo</h3>
+                <p>Con anni di esperienza nel settore della consulenza del lavoro, offro alle imprese del territorio fiorentino un supporto costante e aggiornato sulle normative vigenti.</p>
+                <p>Il mio obiettivo è sollevare l'imprenditore dalla complessa burocrazia legata alla gestione del personale, garantendo soluzioni su misura, trasparenza e massima affidabilità.</p>
+                <br>
+                <ul style="list-style-type: '✓ '; padding-left: 10px; line-height: 2;">
+                    <li>Aggiornamento normativo continuo</li>
+                    <li>Rapporto diretto e personalizzato col cliente</li>
+                    <li>Puntualità nelle scadenze fiscali e previdenziali</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <!-- INSERISCI QUI IL NOME DELLA FOTO. Es: src="foto-alessandra.jpg" -->
+                <img src="https://via.placeholder.com/500x400?text=Foto+Professionale" alt="Alessandra Ricci - Consulente del Lavoro">
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATTI -->
+    <section id="contatti" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Contattami per una Consulenza</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Recapiti dello Studio</h3>
+                    <p><strong>Indirizzo:</strong> Via Panciatichi, 110, 50127 Firenze FI, Italia</p>
+                    <p><strong>Telefono:</strong> [Inserisci Telefono]</p>
+                    <p><strong>Email:</strong> [Inserisci Email]</p>
+                    <p><strong>Orari:</strong> Lun - Ven: 09:00 - 18:00 (Si riceve su appuntamento)</p>
+                    <br>
+                    <!-- Mappa Google Incorporata -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2880.088463567702!2d11.2323!3d43.7937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a55cebb021873%3A0xc68d407802bc0f7a!2sVia%20Panciatichi%2C%20110%2C%2050127%20Firenze%20FI!5e0!3m2!1sit!2sit!4v1690000000000!5m2!1sit!2sit" width="100%" height="250" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="contact-form">
+                    <h3>Invia una Richiesta</h3>
+                    <!-- Nota: per far funzionare il form su GitHub Pages gratuitamente puoi usare un servizio come Formspree (es. action="https://formspree.io/f/TUO-CODICE") -->
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="nome">Nome e Cognome / Azienda</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input type="tel" id="telefono" name="telefono">
+                        </div>
+                        <div class="form-group">
+                            <label for="messaggio">Come posso aiutarti?</label>
+                            <textarea id="messaggio" name="messaggio" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Invia Messaggio</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p><strong>Alessandra Ricci - Consulente del Lavoro</strong></p>
+            <p>Via Panciatichi, 110, 50127 Firenze FI | P.IVA: [Inserisci Partita IVA]</p>
+            <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.7;">
+                &copy; 2026 Tutti i diritti riservati. <a href="#" style="text-decoration: underline;">Privacy Policy</a> | <a href="#" style="text-decoration: underline;">Cookie Policy</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
