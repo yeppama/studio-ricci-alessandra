@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alessandra Ricci | Consulente del Lavoro a Firenze</title>
     <meta name="description" content="Consulenza del lavoro professionale per imprese a Firenze. Gestione del personale, elaborazione buste paga e consulenza previdenziale.">
-    
-    <!-- Google Fonts: Inter per leggibilità, Playfair Display per eleganza nei titoli -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome per le icone -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <!-- Segnala che il JS è attivo: le animazioni partono solo in questo caso -->
+    <script>document.documentElement.classList.add('js');</script>
+
     <style>
-        /* Variabili Colore Avanzate */
+        /* Font ospitati sul sito (nessuna richiesta a Google: niente trasferimento di IP a terzi) */
+        @font-face { font-family: 'Inter'; font-weight: 300; font-style: normal; font-display: swap; src: url('assets/fonts/inter-latin-300-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Inter'; font-weight: 400; font-style: normal; font-display: swap; src: url('assets/fonts/inter-latin-400-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Inter'; font-weight: 500; font-style: normal; font-display: swap; src: url('assets/fonts/inter-latin-500-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Inter'; font-weight: 600; font-style: normal; font-display: swap; src: url('assets/fonts/inter-latin-600-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Playfair Display'; font-weight: 600; font-style: normal; font-display: swap; src: url('assets/fonts/playfair-display-latin-600-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Playfair Display'; font-weight: 700; font-style: normal; font-display: swap; src: url('assets/fonts/playfair-display-latin-700-normal.woff2') format('woff2'); }
+
         :root {
-            --primary: #0F172A;      /* Blu Notte Profondo */
+            --primary: #0F172A;
             --primary-light: #1E293B;
-            --accent: #2563EB;       /* Blu Elettrico/Business */
+            --accent: #2563EB;
             --accent-hover: #1D4ED8;
-            --bg-light: #F8FAFC;     /* Grigio Chiarissimo per sfondi */
+            --bg-light: #F8FAFC;
             --text-main: #334155;
             --text-muted: #64748B;
             --white: #FFFFFF;
@@ -30,33 +31,48 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Reset & Base */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            color: var(--text-main); 
-            line-height: 1.7; 
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text-main);
+            line-height: 1.7;
             background-color: var(--white);
             overflow-x: hidden;
         }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--primary); }
+        h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--primary); }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         ul { list-style: none; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
 
-        /* Effetti di Animazione (Scroll Reveal) */
-        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; }
+        /* Icone SVG interne (sostituiscono FontAwesome da CDN) */
+        .ico { width: 1em; height: 1em; fill: currentColor; display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
 
-        /* Bottoni Dinamici */
+        /* Accessibilità: salto al contenuto e focus visibile */
+        .skip-link { position: absolute; left: 12px; top: -60px; z-index: 2000; background: var(--white); color: var(--primary); padding: 10px 16px; border-radius: 8px; font-weight: 600; }
+        .skip-link:focus { top: 12px; }
+        :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+        /* Segnaposto da compilare: volutamente evidenti */
+        .todo { background: #FDE047; color: #111827; padding: 0 .35em; border-radius: 3px; font-weight: 600; font-style: normal; }
+
+        /* Animazioni: solo con JS attivo E senza preferenza "riduci movimento".
+           Senza JS o con movimento ridotto, i contenuti sono subito visibili. */
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+            .js .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
+            .js .reveal.active { opacity: 1; transform: translateY(0); }
+            .delay-1 { transition-delay: 0.1s; }
+            .delay-2 { transition-delay: 0.2s; }
+            .delay-3 { transition-delay: 0.3s; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+        }
+
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             background-color: var(--accent); color: var(--white);
-            padding: 14px 28px; border-radius: 8px; font-weight: 500;
+            padding: 14px 28px; border-radius: 8px; font-weight: 500; font-size: 1rem; font-family: inherit;
             border: none; cursor: pointer; transition: var(--transition);
             box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
         }
@@ -66,10 +82,10 @@
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
             color: var(--white);
         }
-        
-        /* Header Dinamico (Trasparente in cima, Bianco allo scroll) */
-        header { 
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; 
+        .btn[disabled] { opacity: .6; cursor: wait; transform: none; }
+
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             padding: 25px 0; transition: var(--transition);
             background: transparent;
         }
@@ -79,23 +95,33 @@
             padding: 15px 0;
             box-shadow: var(--shadow-sm);
         }
-        .header-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; line-height: 1.2; transition: var(--transition); }
-        .logo span { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 400; display: block; letter-spacing: 1px; text-transform: uppercase; }
-        
-        /* Colori Header dinamici */
+        .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; position: relative; }
+        .logo { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; line-height: 1.2; transition: var(--transition); }
+        .logo span { font-family: 'Inter', system-ui, sans-serif; font-size: 0.8rem; font-weight: 400; display: block; letter-spacing: 1px; text-transform: uppercase; }
+
         header:not(.scrolled) .logo { color: var(--white); }
         header:not(.scrolled) .logo span { color: rgba(255,255,255,0.8); }
         header.scrolled .logo { color: var(--primary); }
         header.scrolled .logo span { color: var(--text-muted); }
-        
+
         .nav-links { display: flex; gap: 30px; align-items: center; }
         header:not(.scrolled) .nav-links a:not(.btn) { color: rgba(255,255,255,0.9); }
         header.scrolled .nav-links a:not(.btn) { color: var(--primary); font-weight: 500; }
         .nav-links a:not(.btn):hover { color: var(--accent) !important; }
 
-        /* Hero Section Premium */
-        .hero { 
+        /* Pulsante menu mobile (visibile solo su schermi piccoli e con JS) */
+        .nav-toggle {
+            display: none; align-items: center; justify-content: center;
+            width: 44px; height: 44px; border-radius: 8px; border: none; cursor: pointer;
+            background: transparent; font-size: 1.4rem;
+        }
+        header:not(.scrolled) .nav-toggle { color: var(--white); }
+        header.scrolled .nav-toggle { color: var(--primary); }
+        .nav-toggle .ico-close { display: none; }
+        .nav-toggle[aria-expanded="true"] .ico-open { display: none; }
+        .nav-toggle[aria-expanded="true"] .ico-close { display: inline-block; }
+
+        .hero {
             position: relative;
             background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
             min-height: 100vh;
@@ -104,7 +130,6 @@
             padding-top: 80px;
             overflow: hidden;
         }
-        /* Elementi decorativi Hero */
         .hero::before {
             content: ''; position: absolute; top: -10%; right: -5%; width: 500px; height: 500px;
             background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, rgba(0,0,0,0) 70%);
@@ -119,29 +144,26 @@
         .hero h1 { font-size: 3.8rem; margin-bottom: 25px; line-height: 1.15; color: var(--white); }
         .hero p { font-size: 1.25rem; margin-bottom: 40px; font-weight: 300; opacity: 0.9; }
 
-        /* Layout Sezioni */
         .section { padding: 100px 0; }
         .section-light { background-color: var(--bg-light); }
         .section-header { text-align: center; margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; }
         .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
         .section-header p { color: var(--text-muted); }
 
-        /* Grid Servizi Dinamica */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
-        .service-card { 
-            background: var(--white); padding: 40px 30px; 
-            border-radius: 16px; box-shadow: var(--shadow-sm); 
+        .service-card {
+            background: var(--white); padding: 40px 30px;
+            border-radius: 16px; box-shadow: var(--shadow-sm);
             transition: var(--transition); border: 1px solid rgba(0,0,0,0.03);
             position: relative; overflow: hidden;
         }
-        .service-card::after { /* Linea colorata hover */
+        .service-card::after {
             content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 4px;
             background: var(--accent); transition: var(--transition);
         }
         .service-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
         .service-card:hover::after { width: 100%; }
-        
-        .service-icon { 
+        .service-icon {
             width: 60px; height: 60px; background: var(--bg-light); color: var(--accent);
             border-radius: 12px; display: flex; align-items: center; justify-content: center;
             font-size: 1.5rem; margin-bottom: 25px; transition: var(--transition);
@@ -150,66 +172,92 @@
         .service-card h3 { margin-bottom: 15px; font-size: 1.3rem; }
         .service-card p { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* Chi Sono */
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .about-image-wrapper { position: relative; }
-        .about-image { width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg); display: block; }
+        /* Riquadro al posto della foto di repertorio, finché non arriva la foto vera */
+        .photo-placeholder {
+            aspect-ratio: 4 / 5; width: 100%; border-radius: 20px; border: 3px dashed #CBD5E1;
+            background: var(--bg-light); display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 30px; color: var(--text-muted);
+        }
         .experience-badge {
             position: absolute; bottom: -20px; right: -20px; background: var(--white);
             padding: 20px; border-radius: 16px; box-shadow: var(--shadow-lg);
             display: flex; align-items: center; gap: 15px;
         }
-        .experience-badge .number { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--accent); line-height: 1; }
+        .experience-badge .number { font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; font-weight: 700; color: var(--accent); line-height: 1; }
         .experience-badge .text { font-size: 0.85rem; font-weight: 600; color: var(--primary); text-transform: uppercase; line-height: 1.2; }
-        
-        .about-text h3 { color: var(--accent); font-family: 'Inter', sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+
+        .about-text h3 { color: var(--accent); font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
         .about-text h2 { font-size: 2.5rem; margin-bottom: 25px; }
         .about-text p { margin-bottom: 20px; color: var(--text-muted); }
         .features-list { margin-top: 30px; }
         .features-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; font-weight: 500; }
-        .features-list i { color: var(--accent); background: rgba(37,99,235,0.1); padding: 8px; border-radius: 50%; font-size: 0.8rem; }
+        .features-list .ico { color: var(--accent); background: rgba(37,99,235,0.1); padding: 8px; border-radius: 50%; width: 2em; height: 2em; }
 
-        /* Contatti (Glassmorphism Form) */
         .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; }
         .contact-info-card { background: var(--primary); color: var(--white); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-lg); }
         .contact-info-card h3 { color: var(--white); margin-bottom: 30px; }
         .contact-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
-        .contact-item i { font-size: 1.2rem; color: #60A5FA; margin-top: 5px; }
-        .contact-item h4 { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #94A3B8; margin-bottom: 3px; font-weight: 400; }
+        .contact-item > .ico { font-size: 1.2rem; color: #60A5FA; margin-top: 5px; }
+        .contact-item h4 { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: #94A3B8; margin-bottom: 3px; font-weight: 400; }
         .contact-item p { font-weight: 500; }
-        
+        .contact-item a:hover { color: #93C5FD; }
+
         .contact-form-card { background: var(--white); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-lg); }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .form-group { margin-bottom: 20px; }
         .form-group.full { grid-column: span 2; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; color: var(--primary); }
-        .form-control { 
-            width: 100%; padding: 14px 16px; border: 1px solid #E2E8F0; 
+        .form-control {
+            width: 100%; padding: 14px 16px; border: 1px solid #CBD5E1;
             border-radius: 8px; font-family: inherit; font-size: 1rem;
             transition: var(--transition); background: #F8FAFC;
         }
-        .form-control:focus { outline: none; border-color: var(--accent); background: var(--white); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
-        
-        /* Mappa */
-        .map-container { margin-top: 60px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); height: 400px; }
+        .form-control:focus { outline: none; border-color: var(--accent); background: var(--white); box-shadow: 0 0 0 4px rgba(37,99,235,0.15); }
+        .form-group.check label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: 0.9rem; color: var(--text-main); }
+        .form-group.check input { margin-top: 5px; width: 18px; height: 18px; flex-shrink: 0; }
+        .form-group.check a { color: var(--accent); text-decoration: underline; }
+        .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .form-status { margin-top: 15px; padding: 14px 16px; border-radius: 8px; font-size: 0.95rem; }
+        .form-status:empty { display: none; }
+        .form-status.ok { background: #DCFCE7; color: #14532D; }
+        .form-status.err { background: #FEE2E2; color: #7F1D1D; }
 
-        /* Footer */
+        /* Mappa caricata solo su richiesta (niente Google senza consenso) */
+        .map-container { margin-top: 60px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); height: 400px; background: #E2E8F0; }
+        .map-container iframe { width: 100%; height: 100%; border: 0; display: block; }
+        .map-consent { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; text-align: center; padding: 30px; }
+        .map-consent p { max-width: 520px; color: var(--text-main); font-size: 0.95rem; }
+        .map-consent a.link { color: var(--accent); text-decoration: underline; }
+
         footer { background-color: var(--primary-light); color: #94A3B8; padding: 50px 0 20px; }
         .footer-content { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; margin-bottom: 20px; }
-        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); font-weight: 700; }
-        .footer-links a { color: #94A3B8; margin-left: 20px; transition: var(--transition); }
+        .footer-logo { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; color: var(--white); font-weight: 700; }
+        .footer-links a { color: #CBD5E1; margin-left: 20px; transition: var(--transition); }
         .footer-links a:hover { color: var(--white); }
-        .footer-bottom { text-align: center; font-size: 0.85rem; }
+        .footer-bottom { text-align: center; font-size: 0.85rem; line-height: 1.9; }
 
-        /* Responsive Mobile */
         @media (max-width: 992px) {
             .about-grid, .contact-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.8rem; }
-            .experience-badge { bottom: 20px; right: 20px; } /* Evita che esca dallo schermo */
+            .experience-badge { bottom: 20px; right: 20px; }
         }
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Su mobile andrebbe un menu hamburger, qui lo semplifichiamo */
+            /* Senza JS il menu resta visibile e va a capo; con JS diventa un pannello a scomparsa */
+            .nav-links { flex-wrap: wrap; gap: 14px; }
+            .js .nav-toggle { display: inline-flex; }
+            .js .nav-links {
+                display: none; position: absolute; top: calc(100% + 12px); left: 25px; right: 25px;
+                flex-direction: column; align-items: stretch; gap: 4px;
+                background: var(--white); padding: 14px; border-radius: 14px; box-shadow: var(--shadow-lg);
+            }
+            .js .nav-links.open { display: flex; }
+            .js .nav-links a:not(.btn) { color: var(--primary) !important; padding: 12px 10px; font-weight: 500; }
+            .js .nav-links .btn { margin-top: 6px; }
             .hero h1 { font-size: 2.2rem; }
+            .section { padding: 70px 0; }
+            .contact-info-card, .contact-form-card { padding: 28px 22px; }
             .form-grid { grid-template-columns: 1fr; }
             .form-group.full { grid-column: span 1; }
             .footer-content { flex-direction: column; gap: 20px; text-align: center; }
@@ -218,64 +266,66 @@
     </style>
 </head>
 <body>
+<!-- Icone: Font Awesome Free 7.3.1, licenza CC BY 4.0 (fontawesome.com/license/free) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="i-arrow-right" viewBox="0 0 512 512"><path fill="currentColor" d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></symbol><symbol id="i-file-invoice-dollar" viewBox="0 0 384 512"><path fill="currentColor" d="M0 64C0 28.7 28.7 0 64 0L213.5 0c17 0 33.3 6.7 45.3 18.7L365.3 125.3c12 12 18.7 28.3 18.7 45.3L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm208-5.5l0 93.5c0 13.3 10.7 24 24 24L325.5 176 208 58.5zM64 88c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L88 64C74.7 64 64 74.7 64 88zm0 96c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-48 0c-13.3 0-24 10.7-24 24zm112 76l0 4c-28.8 .3-52 23.7-52 52.5 0 25.7 18.5 47.6 43.9 51.8l41.7 7c6 1 10.4 6.2 10.4 12.3 0 6.9-5.6 12.5-12.5 12.5L152 400c-11 0-20 9-20 20s9 20 20 20l24 0 0 4c0 11 9 20 20 20s20-9 20-20l0-4.7c25-4.1 44-25.7 44-51.8 0-25.7-18.5-47.6-43.9-51.8l-41.7-7c-6-1-10.4-6.2-10.4-12.3 0-6.9 5.6-12.5 12.5-12.5l47.5 0c11 0 20-9 20-20s-9-20-20-20l-8 0 0-4c0-11-9-20-20-20s-20 9-20 20z"/></symbol><symbol id="i-file-signature" viewBox="0 0 640 512"><path fill="currentColor" d="M64.1 64c0-35.3 28.7-64 64-64L277.6 0c17 0 33.3 6.7 45.3 18.7L429.3 125.3c12 12 18.7 28.3 18.7 45.3l0 97.5-132 132-42.1 0-16.1-53.6c-4.7-15.7-19.1-26.4-35.5-26.4-11.3 0-21.9 5.1-28.9 13.9L133.3 409c-8.3 10.3-6.6 25.5 3.7 33.7s25.5 6.6 33.7-3.8l47.1-58.8 15.2 50.7c3 10.2 12.4 17.1 23 17.1l31.5 0c-.9 3.1-1.7 6.3-2.3 9.5l-10.9 54.5-146.2 0c-35.3 0-64-28.7-64-64l0-384zm208-5.5l0 93.5c0 13.3 10.7 24 24 24l93.5 0-117.5-117.5zm60.2 408.4c2.5-12.4 8.6-23.8 17.5-32.7l118.9-118.9 80 80-118.9 118.9c-8.9 8.9-20.3 15-32.7 17.5l-59.6 11.9c-.9 .2-1.9 .3-2.9 .3-8 0-14.6-6.5-14.6-14.6 0-1 .1-1.9 .3-2.9l11.9-59.6zm267.8-123l-28.8 28.8-80-80 28.8-28.8c22.1-22.1 57.9-22.1 80 0s22.1 57.9 0 80z"/></symbol><symbol id="i-scale-balanced" viewBox="0 0 640 512"><path fill="currentColor" d="M384 32l128 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L398.4 96c-5.2 25.8-22.9 47.1-46.4 57.3l0 294.7 160 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-384 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l160 0 0-294.7c-23.5-10.3-41.2-31.6-46.4-57.3L128 96c-17.7 0-32-14.3-32-32s14.3-32 32-32l128 0c14.6-19.4 37.8-32 64-32s49.4 12.6 64 32zm55.6 288L584.4 320 512 195.8 439.6 320zM512 416c-62.9 0-115.2-34-126-78.9-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8l95.2 163.2c5.7 9.8 9.3 21.1 6.7 32.1-10.8 44.8-63.1 78.9-126 78.9zM126.8 195.8L54.4 320 199.3 320 126.8 195.8zM.9 337.1c-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8l95.2 163.2c5.7 9.8 9.3 21.1 6.7 32.1-10.8 44.8-63.1 78.9-126 78.9S11.7 382 .9 337.1z"/></symbol><symbol id="i-chart-line" viewBox="0 0 512 512"><path fill="currentColor" d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64L0 400c0 44.2 35.8 80 80 80l400 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 416c-8.8 0-16-7.2-16-16L64 64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7 262.6 153.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l73.4-73.4 57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/></symbol><symbol id="i-check" viewBox="0 0 448 512"><path fill="currentColor" d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></symbol><symbol id="i-location-dot" viewBox="0 0 384 512"><path fill="currentColor" d="M0 188.6C0 84.4 86 0 192 0S384 84.4 384 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0-50.2-54.5-170.4-197.5-170.4-316.8zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/></symbol><symbol id="i-phone" viewBox="0 0 512 512"><path fill="currentColor" d="M160.2 25C152.3 6.1 131.7-3.9 112.1 1.4l-5.5 1.5c-64.6 17.6-119.8 80.2-103.7 156.4 37.1 175 174.8 312.7 349.8 349.8 76.3 16.2 138.8-39.1 156.4-103.7l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2C233.9 335.4 177.3 277 144.8 205.3L189 169.3c13.9-11.3 18.6-30.4 11.8-47L160.2 25z"/></symbol><symbol id="i-envelope" viewBox="0 0 512 512"><path fill="currentColor" d="M48 64c-26.5 0-48 21.5-48 48 0 15.1 7.1 29.3 19.2 38.4l208 156c17.1 12.8 40.5 12.8 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48L48 64zM0 196L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-188-198.4 148.8c-34.1 25.6-81.1 25.6-115.2 0L0 196z"/></symbol><symbol id="i-paper-plane" viewBox="0 0 576 512"><path fill="currentColor" d="M536.4-26.3c9.8-3.5 20.6-1 28 6.3s9.8 18.2 6.3 28l-178 496.9c-5 13.9-18.1 23.1-32.8 23.1-14.2 0-27-8.6-32.3-21.7l-64.2-158c-4.5-11-2.5-23.6 5.2-32.6l94.5-112.4c5.1-6.1 4.7-15-.9-20.6s-14.6-6-20.6-.9L229.2 276.1c-9.1 7.6-21.6 9.6-32.6 5.2L38.1 216.8c-13.1-5.3-21.7-18.1-21.7-32.3 0-14.7 9.2-27.8 23.1-32.8l496.9-178z"/></symbol><symbol id="i-bars" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></symbol><symbol id="i-xmark" viewBox="0 0 384 512"><path fill="currentColor" d="M55.1 73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L147.2 256 9.9 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192.5 301.3 329.9 438.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.8 256 375.1 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192.5 210.7 55.1 73.4z"/></symbol><symbol id="i-calendar-check" viewBox="0 0 448 512"><path fill="currentColor" d="M328 0c13.3 0 24 10.7 24 24l0 40 32 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 128C0 92.7 28.7 64 64 64l32 0 0-40c0-13.3 10.7-24 24-24s24 10.7 24 24l0 40 160 0 0-40c0-13.3 10.7-24 24-24zM64 112c-8.8 0-16 7.2-16 16l0 288c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-288c0-8.8-7.2-16-16-16L64 112zm230.7 65.9c7.8-10.7 22.8-13.1 33.5-5.3 10.7 7.8 13.1 22.8 5.3 33.5L211.4 374.1c-4.1 5.7-10.5 9.3-17.5 9.8-7 .5-13.9-2-18.8-6.9l-55.9-55.9c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l36 36 105.6-145.2z"/></symbol><symbol id="i-clock" viewBox="0 0 512 512"><path fill="currentColor" d="M464 256a208 208 0 1 1 -416 0 208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0 256 256 0 1 0 -512 0zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></symbol></svg>
+    <a href="#contenuto" class="skip-link">Vai al contenuto</a>
 
-    <!-- HEADER DINAMICO -->
     <header id="navbar">
         <div class="container header-content">
-            <a href="#" class="logo">
+            <a href="#top" class="logo">
                 Alessandra Ricci
                 <span>Consulente del Lavoro</span>
             </a>
-            <nav class="nav-links">
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principale" aria-label="Apri il menu">
+                <svg class="ico ico-open" aria-hidden="true"><use href="#i-bars"/></svg>
+                <svg class="ico ico-close" aria-hidden="true"><use href="#i-xmark"/></svg>
+            </button>
+            <nav class="nav-links" id="menu-principale" aria-label="Menu principale">
                 <a href="#servizi">Servizi</a>
                 <a href="#chi-sono">Chi Sono</a>
                 <a href="#contatti">Contatti</a>
-                <a href="#contatti" class="btn"><i class="fa-regular fa-calendar-check"></i> Richiedi Consulenza</a>
+                <a href="#contatti" class="btn"><svg class="ico" aria-hidden="true"><use href="#i-calendar-check"/></svg> Richiedi Consulenza</a>
             </nav>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
+    <main id="contenuto">
+    <section class="hero" id="top">
         <div class="container hero-content reveal">
             <div class="hero-badge">Studio di Consulenza Firenze</div>
             <h1>Gestione del Personale e Consulenza del Lavoro</h1>
             <p>Affianchiamo aziende e professionisti nella gestione strategica delle risorse umane, elaborazione paghe e previdenza con massima precisione e affidabilità.</p>
             <a href="#contatti" class="btn" style="padding: 16px 32px; font-size: 1.1rem;">
-                Prenota Appuntamento <i class="fa-solid fa-arrow-right"></i>
+                Prenota Appuntamento <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>
             </a>
         </div>
     </section>
 
-    <!-- SERVIZI -->
     <section id="servizi" class="section section-light">
         <div class="container">
             <div class="section-header reveal">
                 <h2>Le Nostre Aree di Competenza</h2>
                 <p>Soluzioni su misura per sollevare l'imprenditore dalla burocrazia e ottimizzare la gestione aziendale.</p>
             </div>
-            
+
             <div class="services-grid">
                 <div class="service-card reveal delay-1">
-                    <div class="service-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <div class="service-icon"><svg class="ico" aria-hidden="true"><use href="#i-file-invoice-dollar"/></svg></div>
                     <h3>Elaborazione Paghe</h3>
                     <p>Gestione completa e puntuale di cedolini paga, contributi, F24 e tutti gli adempimenti mensili obbligatori per aziende di ogni settore.</p>
                 </div>
-                
                 <div class="service-card reveal delay-2">
-                    <div class="service-icon"><i class="fa-solid fa-file-signature"></i></div>
+                    <div class="service-icon"><svg class="ico" aria-hidden="true"><use href="#i-file-signature"/></svg></div>
                     <h3>Contrattualistica</h3>
                     <p>Consulenza strategica per nuove assunzioni, corretto inquadramento del personale, agevolazioni contributive e attivazione tirocini.</p>
                 </div>
-                
                 <div class="service-card reveal delay-3">
-                    <div class="service-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <div class="service-icon"><svg class="ico" aria-hidden="true"><use href="#i-scale-balanced"/></svg></div>
                     <h3>Consulenza Sindacale</h3>
                     <p>Assistenza qualificata nella gestione del contenzioso del lavoro, procedimenti disciplinari e rappresentanza in sede di vertenza.</p>
                 </div>
-                
                 <div class="service-card reveal delay-1">
-                    <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="service-icon"><svg class="ico" aria-hidden="true"><use href="#i-chart-line"/></svg></div>
                     <h3>Consulenza Aziendale</h3>
                     <p>Analisi approfondita del costo del lavoro, elaborazione budget del personale e implementazione di piani di welfare aziendale.</p>
                 </div>
@@ -283,162 +333,223 @@
         </div>
     </section>
 
-    <!-- CHI SONO -->
     <section id="chi-sono" class="section">
         <div class="container about-grid">
             <div class="about-image-wrapper reveal">
-                <!-- IMMAGINE: Inserisci il nome del file della foto vera -->
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Alessandra Ricci" class="about-image">
+                <!-- FOTO: sostituire questo riquadro con
+                     <img src="materiali/NOME-FILE.jpg" alt="Alessandra Ricci nel suo studio" class="about-image" width="800" height="1000">
+                     La foto di repertorio Unsplash è stata rimossa. -->
+                <div class="photo-placeholder" role="img" aria-label="Foto in arrivo">
+                    <span class="todo">[DA INSERIRE: foto vera di Alessandra – file in materiali/]</span>
+                </div>
                 <div class="experience-badge">
-                    <span class="number">15+</span>
+                    <span class="number"><span class="todo">[DA VERIFICARE: anni]</span></span>
                     <span class="text">Anni di<br>Esperienza</span>
                 </div>
             </div>
-            
+
             <div class="about-text reveal delay-1">
                 <h3>La Professionista</h3>
                 <h2>Alessandra Ricci</h2>
-                <p>Sono una Consulente del Lavoro regolarmente iscritta all'Albo, con una solida esperienza maturata affiancando le realtà imprenditoriali del territorio fiorentino.</p>
+                <p>Sono una Consulente del Lavoro iscritta all'Albo dei Consulenti del Lavoro di <span class="todo">[DA INSERIRE: provincia]</span> al n. <span class="todo">[DA INSERIRE: numero]</span>, con una solida esperienza maturata affiancando le realtà imprenditoriali del territorio fiorentino.</p>
                 <p>Il mio obiettivo primario è costruire un rapporto di fiducia e collaborazione con ogni cliente. Non mi limito all'elaborazione del dato, ma offro una consulenza proattiva per prevenire criticità e ottimizzare le risorse aziendali, garantendo sempre la massima trasparenza.</p>
-                
+
                 <ul class="features-list">
-                    <li><i class="fa-solid fa-check"></i> Iscritta all'Albo dei Consulenti del Lavoro</li>
-                    <li><i class="fa-solid fa-check"></i> Aggiornamento normativo costante e certificato</li>
-                    <li><i class="fa-solid fa-check"></i> Supporto diretto, empatico e personalizzato</li>
+                    <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg> Iscritta all'Albo dei Consulenti del Lavoro</li>
+                    <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg> Aggiornamento normativo costante e certificato</li>
+                    <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg> Supporto diretto, empatico e personalizzato</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- CONTATTI -->
     <section id="contatti" class="section section-light">
         <div class="container">
             <div class="section-header reveal">
                 <h2>Mettiamoci in Contatto</h2>
                 <p>Compila il modulo o utilizza i recapiti diretti per richiedere informazioni o fissare un incontro conoscitivo in studio.</p>
             </div>
-            
+
             <div class="contact-grid">
-                <!-- Info Card -->
                 <div class="contact-info-card reveal">
                     <h3>Recapiti Studio</h3>
-                    
                     <div class="contact-item">
-                        <i class="fa-solid fa-location-dot"></i>
+                        <svg class="ico" aria-hidden="true"><use href="#i-location-dot"/></svg>
                         <div>
                             <h4>Sede Operativa</h4>
                             <p>Via Panciatichi, 110<br>50127 Firenze (FI), Italia</p>
                         </div>
                     </div>
-                    
                     <div class="contact-item">
-                        <i class="fa-solid fa-phone"></i>
+                        <svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>
                         <div>
                             <h4>Telefono</h4>
-                            <p>[Inserisci Telefono]</p>
+                            <!-- Quando c'è il numero: <a href="tel:+39XXXXXXXXXX">XXX XXX XXXX</a> -->
+                            <p><span class="todo">[DA INSERIRE: telefono]</span></p>
                         </div>
                     </div>
-                    
                     <div class="contact-item">
-                        <i class="fa-solid fa-envelope"></i>
+                        <svg class="ico" aria-hidden="true"><use href="#i-envelope"/></svg>
                         <div>
                             <h4>Email</h4>
-                            <p>[Inserisci Email]</p>
+                            <!-- Quando c'è l'indirizzo: <a href="mailto:...">...</a> -->
+                            <p><span class="todo">[DA INSERIRE: email]</span></p>
                         </div>
                     </div>
-                    
                     <div class="contact-item" style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <i class="fa-regular fa-clock"></i>
+                        <svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>
                         <div>
                             <h4>Orari di Apertura</h4>
                             <p style="font-weight: 400; opacity: 0.9;">Lunedì - Venerdì<br>09:00 - 13:00 | 15:00 - 18:00<br><em>Si riceve preferibilmente su appuntamento.</em></p>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Form Card -->
+
                 <div class="contact-form-card reveal delay-1">
-                    <form action="#" method="POST">
+                    <!-- MODULO: collegato a Formspree. Per attivarlo creare un modulo gratuito su formspree.io
+                         con l'email di Alessandra e sostituire INSERIRE_ID_FORMSPREE con il codice ricevuto.
+                         Finché resta il segnaposto, il modulo avvisa che non è attivo invece di perdere i messaggi. -->
+                    <form id="contact-form" action="https://formspree.io/f/INSERIRE_ID_FORMSPREE" method="POST" novalidate>
+                        <input type="hidden" name="_subject" value="Nuova richiesta dal sito">
+                        <div class="hp" aria-hidden="true">
+                            <label for="sito-web">Non compilare questo campo</label>
+                            <input type="text" id="sito-web" name="_gotcha" tabindex="-1" autocomplete="off">
+                        </div>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="nome">Nome / Azienda *</label>
-                                <input type="text" id="nome" name="nome" class="form-control" required placeholder="Es. Mario Rossi Srl">
+                                <input type="text" id="nome" name="nome" class="form-control" required autocomplete="name" placeholder="Es. Mario Rossi Srl">
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Telefono</label>
-                                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Es. 333 1234567">
+                                <input type="tel" id="telefono" name="telefono" class="form-control" autocomplete="tel" placeholder="Es. 333 1234567">
                             </div>
                             <div class="form-group full">
                                 <label for="email">Indirizzo Email *</label>
-                                <input type="email" id="email" name="email" class="form-control" required placeholder="tua@email.it">
+                                <input type="email" id="email" name="email" class="form-control" required autocomplete="email" placeholder="tua@email.it">
                             </div>
                             <div class="form-group full">
                                 <label for="messaggio">Come posso aiutarti? *</label>
                                 <textarea id="messaggio" name="messaggio" rows="5" class="form-control" required placeholder="Scrivi qui la tua richiesta..."></textarea>
                             </div>
-                            <div class="form-group full" style="margin-top: 10px;">
+                            <div class="form-group full check">
+                                <label for="privacy">
+                                    <input type="checkbox" id="privacy" name="privacy" value="letta" required>
+                                    <span>Ho letto l'<a href="privacy.html" target="_blank" rel="noopener">informativa privacy</a> e acconsento al trattamento dei dati per ricevere una risposta. *</span>
+                                </label>
+                            </div>
+                            <div class="form-group full" style="margin-top: 10px; margin-bottom: 0;">
                                 <button type="submit" class="btn" style="width: 100%; padding: 16px; font-size: 1.1rem;">
-                                    Invia Richiesta <i class="fa-solid fa-paper-plane"></i>
+                                    Invia Richiesta <svg class="ico" aria-hidden="true"><use href="#i-paper-plane"/></svg>
                                 </button>
+                                <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            
-            <!-- Mappa a larghezza piena nel container -->
-            <div class="map-container reveal delay-2">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2880.088463567702!2d11.2323!3d43.7937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a55cebb021873%3A0xc68d407802bc0f7a!2sVia%20Panciatichi%2C%20110%2C%2050127%20Firenze%20FI!5e0!3m2!1sit!2sit!4v1690000000000!5m2!1sit!2sit" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            <div class="map-container reveal delay-2" id="mappa">
+                <div class="map-consent">
+                    <p>La mappa è fornita da Google Maps. Caricandola, il tuo browser invia dati a Google (ad es. l'indirizzo IP). Dettagli nella <a class="link" href="cookie.html">Cookie Policy</a>.</p>
+                    <button type="button" class="btn" id="map-load">Mostra la mappa</button>
+                    <a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Via+Panciatichi+110%2C+50127+Firenze" target="_blank" rel="noopener">Oppure apri l'indirizzo in Google Maps</a>
+                </div>
             </div>
         </div>
     </section>
+    </main>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">Alessandra Ricci</div>
                 <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Cookie Policy</a>
-                    <a href="#">Termini e Condizioni</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="cookie.html">Cookie Policy</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Alessandra Ricci Consulente del Lavoro. Tutti i diritti riservati.<br>Via Panciatichi, 110 - 50127 Firenze | P.IVA: [Inserisci Partita IVA]</p>
+                <p>&copy; 2026 Alessandra Ricci – Consulente del Lavoro<br>
+                Iscritta all'Albo dei Consulenti del Lavoro di <span class="todo">[DA INSERIRE: provincia]</span> n. <span class="todo">[DA INSERIRE: numero]</span><br>
+                Via Panciatichi, 110 - 50127 Firenze | P.IVA <span class="todo">[DA INSERIRE: P.IVA]</span> | PEC <span class="todo">[DA INSERIRE: PEC]</span></p>
             </div>
         </div>
     </footer>
 
-    <!-- SCRIPT PER ANIMAZIONI E HEADER DINAMICO -->
     <script>
-        // 1. Header Dinamico allo scroll
+        // 1. Header allo scroll
         const header = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 50);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        // 2. Menu mobile
+        const toggle = document.querySelector('.nav-toggle');
+        const menu = document.getElementById('menu-principale');
+        const setMenu = (open) => {
+            menu.classList.toggle('open', open);
+            toggle.setAttribute('aria-expanded', String(open));
+            toggle.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
+        };
+        toggle.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); toggle.focus(); } });
+
+        // 3. Animazioni allo scroll (se il browser non supporta IntersectionObserver, mostra tutto)
+        const revealElements = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+            revealElements.forEach(el => revealObserver.observe(el));
+        } else {
+            revealElements.forEach(el => el.classList.add('active'));
+        }
+
+        // 4. Mappa caricata solo su clic
+        document.getElementById('map-load').addEventListener('click', () => {
+            const box = document.getElementById('mappa');
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://www.google.com/maps?q=Via+Panciatichi+110,+50127+Firenze&output=embed';
+            iframe.title = 'Mappa: Via Panciatichi 110, Firenze';
+            iframe.loading = 'lazy';
+            iframe.referrerPolicy = 'no-referrer-when-downgrade';
+            box.replaceChildren(iframe);
+        });
+
+        // 5. Invio del modulo
+        const form = document.getElementById('contact-form');
+        const statusBox = document.getElementById('form-status');
+        const showStatus = (msg, ok) => { statusBox.textContent = msg; statusBox.className = 'form-status ' + (ok ? 'ok' : 'err'); };
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            if (form.action.includes('INSERIRE_ID_FORMSPREE')) {
+                showStatus('Il modulo non è ancora attivo. Per ora scrivi direttamente all’indirizzo email indicato nei recapiti.', false);
+                return;
+            }
+            const button = form.querySelector('button[type="submit"]');
+            button.disabled = true;
+            try {
+                const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                form.reset();
+                showStatus('Grazie, il messaggio è arrivato. Ti risponderò al più presto.', true);
+            } catch (err) {
+                showStatus('Non è stato possibile inviare il messaggio. Riprova oppure scrivi direttamente all’indirizzo email indicato nei recapiti.', false);
+            } finally {
+                button.disabled = false;
             }
         });
-
-        // 2. Animazioni "Scroll Reveal"
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Ferma l'osservazione dopo che è apparso
-                }
-            });
-        }, {
-            root: null,
-            threshold: 0.15, // Si attiva quando il 15% dell'elemento è visibile
-            rootMargin: "0px 0px -50px 0px" // Piccolo anticipo per l'animazione
-        });
-
-        revealElements.forEach(el => revealObserver.observe(el));
     </script>
 </body>
 </html>
